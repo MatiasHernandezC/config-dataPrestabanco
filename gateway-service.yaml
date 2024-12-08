@@ -16,16 +16,23 @@ spring:
       discovery:
         locator:
           enabled: true
+      globalcors:
+        cors-configurations:
+          '[/**]'
+            allowed-origin-patterns: '*'
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allos-credentials: true
       routes:
-        - id: user
-          uri: lb://user
+        - id: user-service
+          uri: lb://user-service
           predicates:
             - Path=/user/**
-        - id: loan
-          uri: lb://loan
+        - id: loan-service
+          uri: lb://loan-service
           predicates:
             - Path=/loan/**
-        - id: userLoan
-          uri: lb://userLoan
+        - id: userLoan-service
+          uri: lb://userLoan-service
           predicates:
             - Path=/userLoan/**

@@ -30,11 +30,17 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
+          filters:
+            - RewritePath=/user/(?<segment>.*),/api/v1/users/${segment}
         - id: loan-service
           uri: lb://loan-service
           predicates:
             - Path=/loan/**
+          filters:
+            - RewritePath=/loan/(?<segment>.*),/api/v1/loans/${segment}
         - id: userLoan-service
           uri: lb://userLoan-service
           predicates:
             - Path=/userLoan/**
+          filters:
+            - RewritePath=/userLoan/(?<segment>.*),/api/v1/userLoans/${segment}

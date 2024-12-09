@@ -12,6 +12,10 @@ eureka:
 
 spring:
   cloud:
+    inetutils:
+      timeout-seconds: 5
+      default-hostname: eureka-service
+      default-ip-address: 127.0.0.1
     gateway:
       discovery:
         locator:

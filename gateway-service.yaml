@@ -14,20 +14,15 @@ spring:
       discovery:
         locator:
           enabled: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       globalcors:
         cors-configurations:
-          "[/**]":
-            allowed-origins:
-              - "http://localhost:5173" # Origen permitido para el frontend
-            allowed-methods:
-              - "GET"
-              - "POST"
-              - "PUT"
-              - "DELETE"
-              - "OPTIONS"
-            allowed-headers:
-              - "*"
-            allow-credentials: true # Permite cookies y autenticación
+          '[/**]':
+            allowed-origin-patterns: '*'
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       routes:
@@ -51,7 +46,3 @@ spring:
             - Path=/userLoan/**
           filters:
             - RewritePath=/userLoan/(?<segment>.*),/api/v1/userLoans/${segment}
-logging:
-  level:
-    org.springframework.web: DEBUG
-    org.springframework.cloud.gateway: DEBUG

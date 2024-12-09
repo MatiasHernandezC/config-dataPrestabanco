@@ -23,7 +23,6 @@ spring:
               - "http://localhost:5173"
             allowed-methods: "*"
             allowed-headers: "*"
-            allow-credentials: true
       routes:
         - id: user-service
           uri: lb://user-service

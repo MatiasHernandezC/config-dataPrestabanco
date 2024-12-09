@@ -51,3 +51,7 @@ spring:
             - Path=/userLoan/**
           filters:
             - RewritePath=/userLoan/(?<segment>.*),/api/v1/userLoans/${segment}
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.cloud.gateway: DEBUG

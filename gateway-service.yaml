@@ -1,14 +1,12 @@
 server:
   port: 8080
-  
+
 eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
       defaultZone: http://eureka-service:8761/eureka/
-  instance:
-    hostname: localhost
 
 spring:
   cloud:
@@ -16,14 +14,22 @@ spring:
       discovery:
         locator:
           enabled: true
-      default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       globalcors:
         cors-configurations:
           '[/**]':
-            allowed-origin-patterns: 'http://localhost:5173'
-            allowed-methods: "*"
-            allowed-headers: "*"
+            allowed-origins:
+              - "http://localhost:5173" # Origen permitido para el frontend
+            allowed-methods:
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "DELETE"
+              - "OPTIONS"
+            allowed-headers:
+              - "*"
+            allow-credentials: true # Permite cookies y autenticación
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       routes:
         - id: user-service
           uri: lb://user-service
@@ -38,6 +44,7 @@ spring:
             - Path=/loan/**
           filters:
             - RewritePath=/loan/(?<segment>.*),/api/v1/loans/${segment}
+
         - id: userLoan-service
           uri: lb://userLoan-service
           predicates:

@@ -18,7 +18,7 @@ spring:
         cors-configurations:
           '[/**]':
             allowed-origins:
-              - "http://localhost:5173" # Origen permitido para el frontend
+              - '' # Origen permitido para el frontend
             allowed-methods:
               - "GET"
               - "POST"
@@ -29,7 +29,7 @@ spring:
               - "*"
             allow-credentials: true # Permite cookies y autenticación
       default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+        - RewritePath /USER-SERVICE/?(?<remaining>.*) = '/${remaining}'
       routes:
         - id: user-service
           uri: lb://user-service

@@ -44,3 +44,10 @@ spring:
             - Path=/userLoan/**
           filters:
             - RewritePath=/userLoan/(?<segment>.*),/api/v1/userLoans/${segment}
+        
+        - id: status-service
+          uri: lb://status-service
+          predicates:
+            - Path=/status/**
+          filters:
+            - RewritePath=/status/(?<segment>.*),/api/v1/status/${segment}
